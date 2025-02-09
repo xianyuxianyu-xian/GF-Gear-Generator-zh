@@ -1,5 +1,6 @@
-#个人使用汉化版本
-安装过程
+# 个人使用汉化版本
+
+## 安装过程
 1.下载代码压缩包
 2.解压至一个文件夹,可以是C:\Users\用户名\AppData\Roaming\Autodesk\Autodesk Fusion 360\API\AddIns\GFGearGenerator1
 3.打开fusion360⇢进入设计页面实用程序选项卡⇢点击附加模块点击附加模块选项卡⇢点击我的附加模块右侧+号
