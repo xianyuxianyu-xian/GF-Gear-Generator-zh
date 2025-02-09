@@ -1,3 +1,14 @@
+#个人使用汉化版本
+安装过程
+1.下载代码压缩包
+2.解压至一个文件夹,可以是C:\Users\用户名\AppData\Roaming\Autodesk\Autodesk Fusion 360\API\AddIns\GFGearGenerator1
+3.打开fusion360⇢进入设计页面实用程序选项卡⇢点击附加模块点击附加模块选项卡⇢点击我的附加模块右侧+号
+![image](https://github.com/user-attachments/assets/576e7160-794d-4c30-bd14-052505586012)
+4.选择步骤2的文件夹就可以使用了(可以选中启动时运行)
+5.大概可能没bug吧,也可能手残改了什么
+
+
+***
 # GF-Gear-Generator
 Main repo of the GF Gear Generator for Autodesk's Fusion 360.
 
