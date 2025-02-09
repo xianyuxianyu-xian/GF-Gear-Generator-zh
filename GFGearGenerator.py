@@ -1634,26 +1634,26 @@ class cmdDefPressedEventHandler(adsk.core.CommandCreatedEventHandler):
 
 
         # Standard dropdown menu
-        standard = inputs.addDropDownCommandInput('standard', 'Standard', adsk.core.DropDownStyles.TextListDropDownStyle)
-        standard.listItems.add('Metric', True)
-        standard.listItems.add('English', False)
+        standard = inputs.addDropDownCommandInput('standard', '标准单位', adsk.core.DropDownStyles.TextListDropDownStyle)
+        standard.listItems.add('公制单位', True)
+        standard.listItems.add('英制单位', False)
 
         # Fusion's default units are cm, since your units are mm you'll need to divide that value with 10
         # a ValueInput = 1 will show as 10mm
-        aaok=inputs.addBoolValueInput('FastCompute','Fast Compute',True,'', get(self, 'FastCompute', defaultfc))
-        inputs.addValueInput('Module', 'Module [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'Module', .03)))
-        pitch = inputs.addValueInput('Pitch', 'Pitch [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'Pitch', 23.460456)))
+        aaok=inputs.addBoolValueInput('FastCompute','快速计算',True,'', get(self, 'FastCompute', defaultfc))
+        inputs.addValueInput('Module', '模数 [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'Module', .03)))
+        pitch = inputs.addValueInput('Pitch', '节距 [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'Pitch', 23.460456)))
         pitch.isVisible = False
         # u=inputs.addDropDownCommandInput('DropDownCommandInput1','Module [mm]', get(self, 'DropDownCommandInput1', 1))
         # qty=u.listItems
         # qty.add('0.3 mm',True,'si')
         # for nn in range(0,len(list)):
         #     qty.add(list[nn],False)
-        inputs.addIntegerSpinnerCommandInput('Z', 'Number of teeth [ ]', 6, 250, 1, get(self, 'Z', 17))
-        inputs.addValueInput('GearHeight_mm', 'Gear height [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_mm', 1)))
-        inHeight = inputs.addValueInput('GearHeight_in', 'Gear height [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_in', 1.27)))
+        inputs.addIntegerSpinnerCommandInput('Z', '齿数', 6, 250, 1, get(self, 'Z', 17))
+        inputs.addValueInput('GearHeight_mm', '齿轮高度 [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_mm', 1)))
+        inHeight = inputs.addValueInput('GearHeight_in', '齿轮高度 [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_in', 1.27)))
         inHeight.isVisible = False
-        inputs.addFloatSpinnerCommandInput('PressureAngle', 'Pressure angle [°]', 'deg', 14.5, 30, 0.5, get(self, 'PressureAngle', 14.5))
+        inputs.addFloatSpinnerCommandInput('PressureAngle', '压力角 [°]', 'deg', 14.5, 30, 0.5, get(self, 'PressureAngle', 14.5))
         
         # When any input changes, the following handler triggers
         onInputChanged = ExternalGear_ChangedHandler()
@@ -1681,7 +1681,7 @@ class ExternalGear_ChangedHandler(adsk.core.InputChangedEventHandler):
             
             # In the case that's the standard, it switches visibiity of module/pitch value inputs as well as gear height
             if changedInput.id == 'standard':
-                if changedInput.selectedItem.name == 'English':
+                if changedInput.selectedItem.name == '英制单位':
                     # English system is selected
 
                     # Tooth Size Value Inputs
@@ -1692,7 +1692,7 @@ class ExternalGear_ChangedHandler(adsk.core.InputChangedEventHandler):
                     inputs2.itemById('GearHeight_mm').isVisible = False
                     inputs2.itemById('GearHeight_in').isVisible = True
 
-                elif changedInput.selectedItem.name == 'Metric':
+                elif changedInput.selectedItem.name == '公制单位':
                     # Metric system is selected
 
                     # Tooth Size Value Inputs
@@ -1718,23 +1718,23 @@ class cmdDef2PressedEventHandler(adsk.core.CommandCreatedEventHandler):
         cmd.isExecutedWhenPreEmpted = False
 
         # Standard dropdown menu
-        standard = inputs.addDropDownCommandInput('standard', 'Standard', adsk.core.DropDownStyles.TextListDropDownStyle)
-        standard.listItems.add('Metric', True)
-        standard.listItems.add('English', False)
+        standard = inputs.addDropDownCommandInput('standard', '标准单位', adsk.core.DropDownStyles.TextListDropDownStyle)
+        standard.listItems.add('公制单位', True)
+        standard.listItems.add('英制单位', False)
 
-        inputs.addBoolValueInput('FastCompute', 'Fast Compute', True, '', get(self, 'FastCompute', defaultfc))
-        inputs.addValueInput('Module', 'Module [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'Module', .03)))
-        pitch = inputs.addValueInput('Pitch', 'Pitch [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'Pitch', 23.460456)))
+        inputs.addBoolValueInput('FastCompute', '快速计算', True, '', get(self, 'FastCompute', defaultfc))
+        inputs.addValueInput('Module', '模数 [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'Module', .03)))
+        pitch = inputs.addValueInput('Pitch', '模数 [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'Pitch', 23.460456)))
         pitch.isVisible = False
         
-        inputs.addIntegerSpinnerCommandInput('Z', 'Number of teeth [ ]', 6, 250, 1, get(self, 'Z', 17))
-        inputs.addValueInput('GearHeight_mm', 'Gear height [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_mm', 1)))
-        inHeight = inputs.addValueInput('GearHeight_in', 'Gear height [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_in', 1.27)))
+        inputs.addIntegerSpinnerCommandInput('Z', '齿数', 6, 250, 1, get(self, 'Z', 17))
+        inputs.addValueInput('GearHeight_mm', '齿轮高度 [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_mm', 1)))
+        inHeight = inputs.addValueInput('GearHeight_in', '齿轮高度 [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_in', 1.27)))
         inHeight.isVisible = False
 
-        inputs.addFloatSpinnerCommandInput('PressureAngle', 'Pressure angle [°]', 'deg', 14.5, 30, 0.5, get(self, 'PressureAngle', 14.5))
-        inputs.addValueInput('RadialThickness_mm','Radial thickness [mm]','mm', adsk.core.ValueInput.createByReal(get(self, 'RadialThickness_mm', 0.5)))
-        inRadialThickness = inputs.addValueInput('RadialThickness_in','Radial thickness [in]','in', adsk.core.ValueInput.createByReal(get(self, 'RadialThickness_in', 0.635)))
+        inputs.addFloatSpinnerCommandInput('PressureAngle', '压力角 [°]', 'deg', 14.5, 30, 0.5, get(self, 'PressureAngle', 14.5))
+        inputs.addValueInput('RadialThickness_mm','外圆厚度 [mm]','mm', adsk.core.ValueInput.createByReal(get(self, 'RadialThickness_mm', 0.5)))
+        inRadialThickness = inputs.addValueInput('RadialThickness_in','外圆厚度 [in]','in', adsk.core.ValueInput.createByReal(get(self, 'RadialThickness_in', 0.635)))
         inRadialThickness.isVisible = False
 
         # When any input changes, the following handler triggers
@@ -1758,23 +1758,23 @@ class cmdDef3PressedEventHandler(adsk.core.CommandCreatedEventHandler):
         cmd.isExecutedWhenPreEmpted = False
 
         # Standard dropdown menu
-        standard = inputs.addDropDownCommandInput('standard', 'Standard', adsk.core.DropDownStyles.TextListDropDownStyle)
-        standard.listItems.add('Metric', True)
-        standard.listItems.add('English', False)
+        standard = inputs.addDropDownCommandInput('standard', '标准单位', adsk.core.DropDownStyles.TextListDropDownStyle)
+        standard.listItems.add('公制单位', True)
+        standard.listItems.add('英制单位', False)
 
-        inputs.addBoolValueInput('FastCompute', 'Fast Compute', True, '', get(self, 'FastCompute', defaultfc))
-        inputs.addValueInput('Module', 'Module [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'Module', .03)))
-        pitch = inputs.addValueInput('Pitch', 'Pitch [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'Pitch', 23.460456)))
+        inputs.addBoolValueInput('FastCompute', '快速计算', True, '', get(self, 'FastCompute', defaultfc))
+        inputs.addValueInput('Module', '模数 [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'Module', .03)))
+        pitch = inputs.addValueInput('Pitch', '模数 [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'Pitch', 23.460456)))
         pitch.isVisible = False
         
-        inputs.addIntegerSpinnerCommandInput('Z', 'Number of teeth [ ]', 6, 250, 1, get(self, 'Z', 17))
-        inputs.addValueInput('GearHeight_mm', 'Gear height [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_mm', 1)))
-        inHeight = inputs.addValueInput('GearHeight_in', 'Gear height [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_in', 1.27)))
+        inputs.addIntegerSpinnerCommandInput('Z', '齿数', 6, 250, 1, get(self, 'Z', 17))
+        inputs.addValueInput('GearHeight_mm', '齿轮高度 [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_mm', 1)))
+        inHeight = inputs.addValueInput('GearHeight_in', '齿轮高度 [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_in', 1.27)))
         inHeight.isVisible = False
 
-        inputs.addFloatSpinnerCommandInput('PressureAngle', 'Pressure angle [°]', 'deg', 14.5, 30, 0.5, get(self, 'PressureAngle', 14.5))
-        inputs.addValueInput('RadialThickness_mm','Radial thickness [mm]','mm', adsk.core.ValueInput.createByReal(get(self, 'RadialThickness_mm', 0.5)))
-        inRadialThickness = inputs.addValueInput('RadialThickness_in','Radial thickness [in]','in', adsk.core.ValueInput.createByReal(get(self, 'RadialThickness_in', 0.635)))
+        inputs.addFloatSpinnerCommandInput('PressureAngle', '压力角 [°]', 'deg', 14.5, 30, 0.5, get(self, 'PressureAngle', 14.5))
+        inputs.addValueInput('RadialThickness_mm','外圆厚度 [mm]','mm', adsk.core.ValueInput.createByReal(get(self, 'RadialThickness_mm', 0.5)))
+        inRadialThickness = inputs.addValueInput('RadialThickness_in','外圆厚度 [in]','in', adsk.core.ValueInput.createByReal(get(self, 'RadialThickness_in', 0.635)))
         inRadialThickness.isVisible = False
 
         # When any input changes, the following handler triggers
@@ -1802,7 +1802,7 @@ class InternalGear_ChangedHandler(adsk.core.InputChangedEventHandler):
             
             # In the case that's the standard, it switches visibiity of module/pitch value inputs as well as gear height
             if changedInput.id == 'standard':
-                if changedInput.selectedItem.name == 'English':
+                if changedInput.selectedItem.name == '英制单位':
                     # English system is selected
 
                     # Tooth Size Value Inputs
@@ -1817,7 +1817,7 @@ class InternalGear_ChangedHandler(adsk.core.InputChangedEventHandler):
                     inputs2.itemById('RadialThickness_mm').isVisible = False
                     inputs2.itemById('RadialThickness_in').isVisible = True
 
-                elif changedInput.selectedItem.name == 'Metric':
+                elif changedInput.selectedItem.name == '公制单位':
                     # Metric system is selected
 
                     # Tooth Size Value Inputs
@@ -1847,29 +1847,29 @@ class cmdDef4PressedEventHandler(adsk.core.CommandCreatedEventHandler):
         cmd.isExecutedWhenPreEmpted = False
 
         # Standard dropdown menu
-        standard = inputs.addDropDownCommandInput('standard', 'Standard', adsk.core.DropDownStyles.TextListDropDownStyle)
-        standard.listItems.add('Metric', True)
-        standard.listItems.add('English', False)
+        standard = inputs.addDropDownCommandInput('standard', '标准单位', adsk.core.DropDownStyles.TextListDropDownStyle)
+        standard.listItems.add('公制单位', True)
+        standard.listItems.add('英制单位', False)
 
-        aaok4=inputs.addBoolValueInput('FastCompute', 'Fast Compute', True, '', get(self, 'FastCompute', defaultfc))
+        aaok4=inputs.addBoolValueInput('FastCompute', '快速计算', True, '', get(self, 'FastCompute', defaultfc))
         
-        HelicalSystem = inputs.addButtonRowCommandInput('HelicalSystem','Helical System', False)
-        HelicalSystem.listItems.add('Radial\n+Holds spur gear geommetry/dimmensions.\n-Has to use special cutting tools, one for each helix angle.',True,'Resources/Helical')
-        HelicalSystem.listItems.add('Normal\n+Uses spur gear cutting tools.\n-Doesn\'t hold spur gear geommetry/dimmensions so it can\'t directly replace them.',False,'Resources/Helical')
+        HelicalSystem = inputs.addButtonRowCommandInput('HelicalSystem','螺旋齿轮系统[不懂]', False)
+        HelicalSystem.listItems.add('径向\n+保持直齿轮的几何形状/尺寸。\n-需要使用特殊的切削工具，每种螺旋角对应一种工具。',True,'Resources/Helical')
+        HelicalSystem.listItems.add('法向\n+使用直齿轮切削刀具\n-不保持直齿轮几何形状/尺寸，因此无法直接替代直齿轮',False,'Resources/Helical')
 
-        inputs.addBoolValueInput('ClockWise', 'Clock Wise', True, '', get(self, 'ClockWise', False))
-        inputs.addBoolValueInput('DoubleHelical','Double Helical',True,'', get(self, 'DoubleHelical', False))
-        inputs.addValueInput('Module', 'Module [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'Module', .03)))
-        pitch = inputs.addValueInput('Pitch', 'Pitch [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'Pitch', 23.460456)))
+        inputs.addBoolValueInput('ClockWise', '齿轮方向逆时针', True, '', get(self, 'ClockWise', False))
+        inputs.addBoolValueInput('DoubleHelical','双螺纹/人字齿',True,'', get(self, 'DoubleHelical', False))
+        inputs.addValueInput('Module', '模数 [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'Module', .03)))
+        pitch = inputs.addValueInput('Pitch', '模数 [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'Pitch', 23.460456)))
         pitch.isVisible = False
         
-        inputs.addIntegerSpinnerCommandInput('Z', 'Number of teeth [ ]', 6, 250, 1, get(self, 'Z', 17))
-        inputs.addValueInput('GearHeight_mm', 'Gear height [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_mm', 1)))
-        inHeight = inputs.addValueInput('GearHeight_in', 'Gear height [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_in', 1.27)))
+        inputs.addIntegerSpinnerCommandInput('Z', '齿数', 6, 250, 1, get(self, 'Z', 17))
+        inputs.addValueInput('GearHeight_mm', '齿轮高度 [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_mm', 1)))
+        inHeight = inputs.addValueInput('GearHeight_in', '齿轮高度 [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_in', 1.27)))
         inHeight.isVisible = False
         
-        inputs.addFloatSpinnerCommandInput('PressureAngle', 'Pressure angle [°]', 'deg', 14.5, 30, 0.5, get(self, 'PressureAngle', 14.5))
-        inputs.addFloatSpinnerCommandInput('HelixAngle','Helix angle [°]','deg',0,89,0.5, get(self, 'HelixAngle', 15))
+        inputs.addFloatSpinnerCommandInput('PressureAngle', '压力角 [°]', 'deg', 14.5, 30, 0.5, get(self, 'PressureAngle', 14.5))
+        inputs.addFloatSpinnerCommandInput('HelixAngle','螺旋角 [°]','deg',0,89,0.5, get(self, 'HelixAngle', 15))
         
         # When any input changes, the following handler triggers
         onInputChanged = ExternalGear_ChangedHandler()
@@ -1893,33 +1893,33 @@ class cmdDef5PressedEventHandler(adsk.core.CommandCreatedEventHandler):
         cmd.isExecutedWhenPreEmpted = False
 
         # Standard dropdown menu
-        standard = inputs.addDropDownCommandInput('standard', 'Standard', adsk.core.DropDownStyles.TextListDropDownStyle)
-        standard.listItems.add('Metric', True)
-        standard.listItems.add('English', False)
+        standard = inputs.addDropDownCommandInput('standard', '标准单位', adsk.core.DropDownStyles.TextListDropDownStyle)
+        standard.listItems.add('公制单位', True)
+        standard.listItems.add('英制单位', False)
 
-        aaok5=inputs.addBoolValueInput('FastCompute', 'Fast Compute', True, '', get(self, 'FastCompute', defaultfc))
+        aaok5=inputs.addBoolValueInput('FastCompute', '快速计算', True, '', get(self, 'FastCompute', defaultfc))
 
-        HelicalSystem = inputs.addButtonRowCommandInput('HelicalSystem','Helical System', False)
-        HelicalSystem.listItems.add('Radial\n+Holds spur gear geommetry/dimmensions.\n-Has to use special cutting tools, one for each helix angle.',True,'Resources/Helical')
-        HelicalSystem.listItems.add('Normal\n+Uses spur gear cutting tools.\n-Doesn\'t hold spur gear geommetry/dimmensions so it can\'t directly replace them.',False,'Resources/Helical')
+        HelicalSystem = inputs.addButtonRowCommandInput('HelicalSystem','螺旋齿轮系统[不懂]', False)
+        HelicalSystem.listItems.add('径向\n+保持直齿轮的几何形状/尺寸。\n-需要使用特殊的切削工具，每种螺旋角对应一种工具。',True,'Resources/Helical')
+        HelicalSystem.listItems.add('法向\n+使用直齿轮切削刀具\n-不保持直齿轮几何形状/尺寸，因此无法直接替代直齿轮',False,'Resources/Helical')
 
-        inputs.addBoolValueInput('ClockWise', 'Clock Wise', True, '', get(self, 'ClockWise', False))
-        inputs.addBoolValueInput('DoubleHelical','Double Helical',True,'', get(self, 'DoubleHelical', False))
-        inputs.addValueInput('Module', 'Module [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'Module', .03)))
-        pitch = inputs.addValueInput('Pitch', 'Pitch [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'Pitch', 23.460456)))
+        inputs.addBoolValueInput('ClockWise', '齿轮方向逆时针', True, '', get(self, 'ClockWise', False))
+        inputs.addBoolValueInput('DoubleHelical','双螺纹/人字齿',True,'', get(self, 'DoubleHelical', False))
+        inputs.addValueInput('Module', '模数 [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'Module', .03)))
+        pitch = inputs.addValueInput('Pitch', '模数 [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'Pitch', 23.460456)))
         pitch.isVisible = False
 
-        inputs.addIntegerSpinnerCommandInput('Z', 'Number of teeth [ ]', 6, 250, 1, get(self, 'Z', 17))
-        inputs.addValueInput('GearHeight_mm', 'Gear height [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_mm', 1)))
-        inHeight = inputs.addValueInput('GearHeight_in', 'Gear height [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_in', 1.27)))
+        inputs.addIntegerSpinnerCommandInput('Z', '齿数', 6, 250, 1, get(self, 'Z', 17))
+        inputs.addValueInput('GearHeight_mm', '齿轮高度 [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_mm', 1)))
+        inHeight = inputs.addValueInput('GearHeight_in', '齿轮高度 [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_in', 1.27)))
         inHeight.isVisible = False
         
-        inputs.addFloatSpinnerCommandInput('PressureAngle', 'Pressure angle [°]', 'deg', 14.5, 30, 0.5, get(self, 'PressureAngle', 14.5))
-        inputs.addValueInput('RadialThickness_mm','Radial thickness [mm]','mm', adsk.core.ValueInput.createByReal(get(self, 'RadialThickness_mm', 0.5)))
-        inRadialThickness = inputs.addValueInput('RadialThickness_in','Radial thickness [in]','in', adsk.core.ValueInput.createByReal(get(self, 'RadialThickness_in', 0.635)))
+        inputs.addFloatSpinnerCommandInput('PressureAngle', '压力角 [°]', 'deg', 14.5, 30, 0.5, get(self, 'PressureAngle', 14.5))
+        inputs.addValueInput('RadialThickness_mm','外圆厚度 [mm]','mm', adsk.core.ValueInput.createByReal(get(self, 'RadialThickness_mm', 0.5)))
+        inRadialThickness = inputs.addValueInput('RadialThickness_in','外圆厚度 [in]','in', adsk.core.ValueInput.createByReal(get(self, 'RadialThickness_in', 0.635)))
         inRadialThickness.isVisible = False
         
-        inputs.addFloatSpinnerCommandInput('HelixAngle', 'Helix angle [°]', 'deg', 0, 89, 0.5, get(self, 'HelixAngle', 15))
+        inputs.addFloatSpinnerCommandInput('HelixAngle', '螺旋角 [°]', 'deg', 0, 89, 0.5, get(self, 'HelixAngle', 15))
 
         # When any input changes, the following handler triggers
         onInputChanged = InternalGear_ChangedHandler()
@@ -1942,33 +1942,33 @@ class cmdDef6PressedEventHandler(adsk.core.CommandCreatedEventHandler):
         cmd.isExecutedWhenPreEmpted = False
 
         # Standard dropdown menu
-        standard = inputs.addDropDownCommandInput('standard', 'Standard', adsk.core.DropDownStyles.TextListDropDownStyle)
-        standard.listItems.add('Metric', True)
-        standard.listItems.add('English', False)
+        standard = inputs.addDropDownCommandInput('standard', '标准单位', adsk.core.DropDownStyles.TextListDropDownStyle)
+        standard.listItems.add('公制单位', True)
+        standard.listItems.add('英制单位', False)
 
-        aaok6=inputs.addBoolValueInput('FastCompute', 'Fast Compute', True, '', get(self, 'FastCompute', defaultfc))
+        aaok6=inputs.addBoolValueInput('FastCompute', '快速计算', True, '', get(self, 'FastCompute', defaultfc))
         
-        HelicalSystem = inputs.addButtonRowCommandInput('HelicalSystem','Helical System', False)
-        HelicalSystem.listItems.add('Radial\n+Holds spur gear geommetry/dimmensions.\n-Has to use special cutting tools, one for each helix angle.',True,'Resources/Helical')
-        HelicalSystem.listItems.add('Normal\n+Uses spur gear cutting tools.\n-Doesn\'t hold spur gear geommetry/dimmensions so it can\'t directly replace them.',False,'Resources/Helical')
+        HelicalSystem = inputs.addButtonRowCommandInput('HelicalSystem','螺旋齿轮系统[不懂]', False)
+        HelicalSystem.listItems.add('径向\n+保持直齿轮的几何形状/尺寸。\n-需要使用特殊的切削工具，每种螺旋角对应一种工具。',True,'Resources/Helical')
+        HelicalSystem.listItems.add('法向\n+使用直齿轮切削刀具\n-不保持直齿轮几何形状/尺寸，因此无法直接替代直齿轮',False,'Resources/Helical')
 
-        inputs.addBoolValueInput('ClockWise', 'Clock Wise', True, '', get(self, 'ClockWise', False))
-        inputs.addBoolValueInput('DoubleHelical','Double Helical',True,'', get(self, 'DoubleHelical', False))
-        inputs.addValueInput('Module', 'Module [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'Module', .03)))
-        pitch = inputs.addValueInput('Pitch', 'Pitch [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'Pitch', 23.460456)))
+        inputs.addBoolValueInput('ClockWise', '齿轮方向逆时针', True, '', get(self, 'ClockWise', False))
+        inputs.addBoolValueInput('DoubleHelical','双螺纹/人字齿',True,'', get(self, 'DoubleHelical', False))
+        inputs.addValueInput('Module', '模数 [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'Module', .03)))
+        pitch = inputs.addValueInput('Pitch', '模数 [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'Pitch', 23.460456)))
         pitch.isVisible = False
         
-        inputs.addIntegerSpinnerCommandInput('Z', 'Number of teeth [ ]', 6, 250, 1, get(self, 'Z', 17))
-        inputs.addValueInput('GearHeight_mm', 'Gear height [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_mm', 1)))
-        inHeight = inputs.addValueInput('GearHeight_in', 'Gear height [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_in', 1.27)))
+        inputs.addIntegerSpinnerCommandInput('Z', '齿数', 6, 250, 1, get(self, 'Z', 17))
+        inputs.addValueInput('GearHeight_mm', '齿轮高度 [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_mm', 1)))
+        inHeight = inputs.addValueInput('GearHeight_in', '齿轮高度 [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_in', 1.27)))
         inHeight.isVisible = False
         
-        inputs.addFloatSpinnerCommandInput('PressureAngle', 'Pressure angle [°]', 'deg', 14.5, 30, 0.5, get(self, 'PressureAngle', 14.5))
-        inputs.addValueInput('RadialThickness_mm','Radial thickness [mm]','mm', adsk.core.ValueInput.createByReal(get(self, 'RadialThickness_mm', 0.5)))
-        inRadialThickness = inputs.addValueInput('RadialThickness_in','Radial thickness [in]','in', adsk.core.ValueInput.createByReal(get(self, 'RadialThickness_in', 0.635)))
+        inputs.addFloatSpinnerCommandInput('PressureAngle', '压力角 [°]', 'deg', 14.5, 30, 0.5, get(self, 'PressureAngle', 14.5))
+        inputs.addValueInput('RadialThickness_mm','外圆厚度 [mm]','mm', adsk.core.ValueInput.createByReal(get(self, 'RadialThickness_mm', 0.5)))
+        inRadialThickness = inputs.addValueInput('RadialThickness_in','外圆厚度 [in]','in', adsk.core.ValueInput.createByReal(get(self, 'RadialThickness_in', 0.635)))
         inRadialThickness.isVisible = False
         
-        inputs.addFloatSpinnerCommandInput('HelixAngle', 'Helix angle [°]', 'deg', 0, 89, 0.5, get(self, 'HelixAngle', 15))
+        inputs.addFloatSpinnerCommandInput('HelixAngle', '螺旋角 [°]', 'deg', 0, 89, 0.5, get(self, 'HelixAngle', 15))
 
         # When any input changes, the following handler triggers
         onInputChanged = InternalGear_ChangedHandler()
@@ -1991,33 +1991,33 @@ class cmdDef7PressedEventHandler(adsk.core.CommandCreatedEventHandler):
         cmd.isExecutedWhenPreEmpted = False
 
         # Standard dropdown menu
-        standard = inputs.addDropDownCommandInput('standard', 'Standard', adsk.core.DropDownStyles.TextListDropDownStyle)
-        standard.listItems.add('Metric', True)
-        standard.listItems.add('English', False)
+        standard = inputs.addDropDownCommandInput('standard', '标准单位', adsk.core.DropDownStyles.TextListDropDownStyle)
+        standard.listItems.add('公制单位', True)
+        standard.listItems.add('英制单位', False)
 
-        RackType = inputs.addButtonRowCommandInput('RackType','Rack Type', False)
-        RackType.listItems.add('Straight\nRecommended for spur gears.',True,'Resources/Recto')
-        RackType.listItems.add('Helical\nRecommended for helical gears.',False,'Resources/Helical')
+        RackType = inputs.addButtonRowCommandInput('RackType','齿条类型', False)
+        RackType.listItems.add('直齿\n- 推荐用于直齿轮',True,'Resources/Recto')
+        RackType.listItems.add('斜齿\n- 调节螺旋角,推荐用于螺旋齿轮',False,'Resources/Helical')
 
-        HelicalSystem = inputs.addButtonRowCommandInput('HelicalSystem','Helical System', False)
-        HelicalSystem.listItems.add('Radial\n+Holds spur gear geommetry/dimmensions.\n-Has to use special cutting tools, one for each helix angle.',True,'Resources/Helical')
-        HelicalSystem.listItems.add('Normal\n+Uses spur gear cutting tools.\n-Doesn\'t hold spur gear geommetry/dimmensions so it can\'t directly replace them.',False,'Resources/Helical')
+        HelicalSystem = inputs.addButtonRowCommandInput('HelicalSystem','螺旋齿轮系统[不懂]', False)
+        HelicalSystem.listItems.add('径向\n+保持直齿轮的几何形状/尺寸。\n-需要使用特殊的切削工具，每种螺旋角对应一种工具。',True,'Resources/Helical')
+        HelicalSystem.listItems.add('法向\n+使用直齿轮切削刀具\n-不保持直齿轮几何形状/尺寸，因此无法直接替代直齿轮',False,'Resources/Helical')
         HelicalSystem.isVisible = False
 
-        inputs.addValueInput('Module', 'Module [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'Module', .03)))
-        pitch = inputs.addValueInput('Pitch', 'Pitch [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'Pitch', 23.460456)))
+        inputs.addValueInput('Module', '模数 [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'Module', .03)))
+        pitch = inputs.addValueInput('Pitch', '模数 [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'Pitch', 23.460456)))
         pitch.isVisible = False
 
-        inputs.addIntegerSpinnerCommandInput('Z', 'Number of teeth [ ]', 6, 250, 1, get(self, 'Z', 17))
-        inputs.addValueInput('RackThickness_mm', 'Rack thickness [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'RackThickness_mm', 1)))
-        RackThickness_in = inputs.addValueInput('RackThickness_in', 'Rack thickness [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'RackThickness_in', .635)))
+        inputs.addIntegerSpinnerCommandInput('Z', '齿数', 6, 250, 1, get(self, 'Z', 17))
+        inputs.addValueInput('RackThickness_mm', '齿条厚度 [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'RackThickness_mm', 1)))
+        RackThickness_in = inputs.addValueInput('RackThickness_in', '齿条厚度 [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'RackThickness_in', .635)))
         RackThickness_in.isVisible = False
 
-        inputs.addFloatSpinnerCommandInput('PressureAngle', 'Pressure angle [°]', 'deg', 14.5, 30, 0.5, get(self, 'PressureAngle', 14.5))
-        HA = inputs.addFloatSpinnerCommandInput('HelixAngle', 'Helix angle [°]', 'deg', 0, 89, 0.5, get(self, 'HelixAngle', 0))
+        inputs.addFloatSpinnerCommandInput('PressureAngle', '压力角 [°]', 'deg', 14.5, 30, 0.5, get(self, 'PressureAngle', 14.5))
+        HA = inputs.addFloatSpinnerCommandInput('HelixAngle', '螺旋角 [°]', 'deg', 0, 89, 0.5, get(self, 'HelixAngle', 0))
         HA.isVisible = False
-        inputs.addValueInput('RackHeight_mm', 'Rack height [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'RackHeight_mm', 1)))
-        RackHeight_in = inputs.addValueInput('RackHeight_in', 'Rack height [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'RackHeight_in', .635)))
+        inputs.addValueInput('RackHeight_mm', '齿条高度 [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'RackHeight_mm', 1)))
+        RackHeight_in = inputs.addValueInput('RackHeight_in', '齿条高度 [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'RackHeight_in', .635)))
         RackHeight_in.isVisible = False
         
         # When any input changes, the following handler triggers
@@ -2045,7 +2045,7 @@ class Rack_ChangedHandler(adsk.core.InputChangedEventHandler):
             
             # In the case that's the standard, it switches visibiity of module/pitch value inputs as well as gear height
             if changedInput.id == 'standard':
-                if changedInput.selectedItem.name == 'English':
+                if changedInput.selectedItem.name == '英制单位':
                     # English system is selected
 
                     # Tooth Size Value Inputs
@@ -2060,7 +2060,7 @@ class Rack_ChangedHandler(adsk.core.InputChangedEventHandler):
                     inputs2.itemById('RackHeight_mm').isVisible = False
                     inputs2.itemById('RackHeight_in').isVisible = True
 
-                elif changedInput.selectedItem.name == 'Metric':
+                elif changedInput.selectedItem.name == '公制单位':
                     # Metric system is selected
 
                     # Tooth Size Value Inputs
@@ -2102,18 +2102,18 @@ class cmdDef8PressedEventHandler(adsk.core.CommandCreatedEventHandler):
         cmd.isExecutedWhenPreEmpted = False
 
         # Standard dropdown menu
-        standard = inputs.addDropDownCommandInput('standard', 'Standard', adsk.core.DropDownStyles.TextListDropDownStyle)
-        standard.listItems.add('Metric', True)
-        standard.listItems.add('English', False)
+        standard = inputs.addDropDownCommandInput('standard', '标准单位', adsk.core.DropDownStyles.TextListDropDownStyle)
+        standard.listItems.add('公制单位', True)
+        standard.listItems.add('英制单位', False)
 
-        inputs.addBoolValueInput('FastCompute', 'Fast Compute', True, '', get(self, 'FastCompute', defaultfc))
-        inputs.addValueInput('Module', 'Module [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'Module', .03)))
-        pitch = inputs.addValueInput('Pitch', 'Pitch [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'Pitch', 23.460456)))
+        inputs.addBoolValueInput('FastCompute', '快速计算', True, '', get(self, 'FastCompute', defaultfc))
+        inputs.addValueInput('Module', '模数 [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'Module', .03)))
+        pitch = inputs.addValueInput('Pitch', '模数 [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'Pitch', 23.460456)))
         pitch.isVisible = False
 
-        inputs.addIntegerSpinnerCommandInput('ZWheel', 'Number of teeth, wheel [ ]', 6, 250, 1, get(self, 'ZWheel', 17))
-        inputs.addIntegerSpinnerCommandInput('ZPinion', 'Number of teeth, pinion [ ]', 6, 250, 1, get(self, 'ZPinion', 17))
-        inputs.addFloatSpinnerCommandInput('PressureAngle', 'Pressure angle [°]', 'deg', 14.5, 30, 0.5, get(self, 'PressureAngle', 14.5))
+        inputs.addIntegerSpinnerCommandInput('ZWheel', '齿数,齿轮1', 6, 250, 1, get(self, 'ZWheel', 17))
+        inputs.addIntegerSpinnerCommandInput('ZPinion', '齿数,齿轮2', 6, 250, 1, get(self, 'ZPinion', 17))
+        inputs.addFloatSpinnerCommandInput('PressureAngle', '压力角 [°]', 'deg', 14.5, 30, 0.5, get(self, 'PressureAngle', 14.5))
         
         # When any input changes, the following handler triggers
         onInputChanged = Bevel_ChangedHandler()
@@ -2140,14 +2140,14 @@ class Bevel_ChangedHandler(adsk.core.InputChangedEventHandler):
             
             # In the case that's the standard, it switches visibiity of module/pitch value inputs as well as gear height
             if changedInput.id == 'standard':
-                if changedInput.selectedItem.name == 'English':
+                if changedInput.selectedItem.name == '英制单位':
                     # English system is selected
 
                     # Tooth Size Value Inputs
                     inputs2.itemById('Module').isVisible = False
                     inputs2.itemById('Pitch').isVisible = True
 
-                elif changedInput.selectedItem.name == 'Metric':
+                elif changedInput.selectedItem.name == '公制单位':
                     # Metric system is selected
 
                     # Tooth Size Value Inputs
@@ -2170,22 +2170,22 @@ class cmdDef9PressedEventHandler(adsk.core.CommandCreatedEventHandler):
         cmd.isExecutedWhenPreEmpted = False
 
         # Standard dropdown menu
-        standard = inputs.addDropDownCommandInput('standard', 'Standard', adsk.core.DropDownStyles.TextListDropDownStyle)
-        standard.listItems.add('Metric', True)
-        standard.listItems.add('English', False)
+        standard = inputs.addDropDownCommandInput('standard', '标准单位', adsk.core.DropDownStyles.TextListDropDownStyle)
+        standard.listItems.add('公制单位', True)
+        standard.listItems.add('英制单位', False)
 
-        inputs.addBoolValueInput('FastCompute','Fast Compute', True, '', get(self, 'FastCompute', defaultfc))
-        inputs.addFloatSpinnerCommandInput('X','Profile shifting coef "X" [ ]','',-1,1,.01, get(self, 'X', 0))
-        inputs.addValueInput('Module', 'Module [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'Module', .03)))
-        pitch = inputs.addValueInput('Pitch', 'Pitch [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'Pitch', 23.460456)))
+        inputs.addBoolValueInput('FastCompute','快速计算', True, '', get(self, 'FastCompute', defaultfc))
+        inputs.addFloatSpinnerCommandInput('X','齿形变位系数','',-1,1,.01, get(self, 'X', 0))
+        inputs.addValueInput('Module', '模数 [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'Module', .03)))
+        pitch = inputs.addValueInput('Pitch', '模数 [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'Pitch', 23.460456)))
         pitch.isVisible = False
 
-        inputs.addIntegerSpinnerCommandInput('Z', 'Number of teeth [ ]', 6, 250, 1, get(self, 'Z', 17))
-        inputs.addValueInput('GearHeight_mm', 'Gear height [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_mm', 1)))
-        inHeight = inputs.addValueInput('GearHeight_in', 'Gear height [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_in', 1.27)))
+        inputs.addIntegerSpinnerCommandInput('Z', '齿数', 6, 250, 1, get(self, 'Z', 17))
+        inputs.addValueInput('GearHeight_mm', '齿轮高度 [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_mm', 1)))
+        inHeight = inputs.addValueInput('GearHeight_in', '齿轮高度 [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_in', 1.27)))
         inHeight.isVisible = False
 
-        inputs.addFloatSpinnerCommandInput('PressureAngle', 'Pressure angle [°]', 'deg', 14.5, 30, 0.5, get(self, 'PressureAngle', 14.5))
+        inputs.addFloatSpinnerCommandInput('PressureAngle', '压力角 [°]', 'deg', 14.5, 30, 0.5, get(self, 'PressureAngle', 14.5))
         
         # When any input changes, the following handler triggers
         onInputChanged = ExternalGear_ChangedHandler()
@@ -2208,30 +2208,30 @@ class cmdDef10PressedEventHandler(adsk.core.CommandCreatedEventHandler):
         cmd.isExecutedWhenPreEmpted = False
 
         # Standard dropdown menu
-        standard = inputs.addDropDownCommandInput('standard', 'Standard', adsk.core.DropDownStyles.TextListDropDownStyle)
-        standard.listItems.add('Metric', True)
-        standard.listItems.add('English', False)
+        standard = inputs.addDropDownCommandInput('standard', '标准单位', adsk.core.DropDownStyles.TextListDropDownStyle)
+        standard.listItems.add('公制单位', True)
+        standard.listItems.add('英制单位', False)
 
-        inputs.addBoolValueInput('FastCompute', 'Fast Compute', True, '', get(self, 'FastCompute', defaultfc))
+        inputs.addBoolValueInput('FastCompute', '快速计算', True, '', get(self, 'FastCompute', defaultfc))
                 
-        HelicalSystem = inputs.addButtonRowCommandInput('HelicalSystem','Helical System', False)
-        HelicalSystem.listItems.add('Radial\n+Holds spur gear geommetry/dimmensions.\n-Has to use special cutting tools, one for each helix angle.',True,'Resources/Helical')
-        HelicalSystem.listItems.add('Normal\n+Uses spur gear cutting tools.\n-Doesn\'t hold spur gear geommetry/dimmensions so it can\'t directly replace them.',False,'Resources/Helical')
+        HelicalSystem = inputs.addButtonRowCommandInput('HelicalSystem','螺旋齿轮系统[不懂]', False)
+        HelicalSystem.listItems.add('径向\n+保持直齿轮的几何形状/尺寸。\n-需要使用特殊的切削工具，每种螺旋角对应一种工具。',True,'Resources/Helical')
+        HelicalSystem.listItems.add('法向\n+使用直齿轮切削刀具\n-不保持直齿轮几何形状/尺寸，因此无法直接替代直齿轮',False,'Resources/Helical')
 
-        inputs.addBoolValueInput('ClockWise', 'Clock Wise', True, '', get(self, 'ClockWise', False))
-        inputs.addBoolValueInput('DoubleHelical','Double Helical',True,'', get(self, 'DoubleHelical', False))
-        inputs.addFloatSpinnerCommandInput('X','Profile shifting coef "X" [ ]','',-1,1,.01, get(self, 'X', 0))
-        inputs.addValueInput('Module', 'Module [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'Module', .03)))
-        pitch = inputs.addValueInput('Pitch', 'Pitch [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'Pitch', 23.460456)))
+        inputs.addBoolValueInput('ClockWise', '齿轮方向逆时针', True, '', get(self, 'ClockWise', False))
+        inputs.addBoolValueInput('DoubleHelical','双螺纹/人字齿',True,'', get(self, 'DoubleHelical', False))
+        inputs.addFloatSpinnerCommandInput('X','齿形变位系数','',-1,1,.01, get(self, 'X', 0))
+        inputs.addValueInput('Module', '模数 [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'Module', .03)))
+        pitch = inputs.addValueInput('Pitch', '模数 [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'Pitch', 23.460456)))
         pitch.isVisible = False
        
-        inputs.addIntegerSpinnerCommandInput('Z', 'Number of teeth [ ]', 6, 250, 1, get(self, 'Z', 17))
-        inputs.addValueInput('GearHeight_mm', 'Gear height [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_mm', 1)))
-        inHeight = inputs.addValueInput('GearHeight_in', 'Gear height [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_in', 1.27)))
+        inputs.addIntegerSpinnerCommandInput('Z', '齿数', 6, 250, 1, get(self, 'Z', 17))
+        inputs.addValueInput('GearHeight_mm', '齿轮高度 [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_mm', 1)))
+        inHeight = inputs.addValueInput('GearHeight_in', '齿轮高度 [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'GearHeight_in', 1.27)))
         inHeight.isVisible = False
         
-        inputs.addFloatSpinnerCommandInput('PressureAngle', 'Pressure angle [°]', 'deg', 14.5, 30, 0.5, get(self, 'PressureAngle', 14.5))
-        inputs.addFloatSpinnerCommandInput('HelixAngle','Helix angle [°]','deg',0,89,0.5, get(self, 'HelixAngle', 15))
+        inputs.addFloatSpinnerCommandInput('PressureAngle', '压力角 [°]', 'deg', 14.5, 30, 0.5, get(self, 'PressureAngle', 14.5))
+        inputs.addFloatSpinnerCommandInput('HelixAngle','螺旋角 [°]','deg',0,89,0.5, get(self, 'HelixAngle', 15))
         
         # When any input changes, the following handler triggers
         onInputChanged = ExternalGear_ChangedHandler()
@@ -2254,38 +2254,38 @@ class cmdDef11PressedEventHandler(adsk.core.CommandCreatedEventHandler):
         cmd.isExecutedWhenPreEmpted = False
 
         # Standard dropdown menu
-        standard = inputs.addDropDownCommandInput('standard', 'Standard', adsk.core.DropDownStyles.TextListDropDownStyle)
-        standard.listItems.add('Metric', True)
-        standard.listItems.add('English', False)
+        standard = inputs.addDropDownCommandInput('standard', '标准单位', adsk.core.DropDownStyles.TextListDropDownStyle)
+        standard.listItems.add('公制单位', True)
+        standard.listItems.add('英制单位', False)
 
-        inputs.addBoolValueInput('FastCompute', 'Fast Compute', True, '', get(self, 'FastCompute', defaultfc))
-        WormGear_Type=inputs.addButtonRowCommandInput('WormGear_Type','Worm Gear Type', False)
-        WormGear_Type.listItems.add('Helical',True,'Resources/Helical')
-        WormGear_Type.listItems.add('Hobbed Straight',False,'Resources/HobbedWorm')
-        WormGear_Type.tooltipDescription = "Helical: The worm wheel is a helical gear.\nHobbed Straight: The screw defines the shape of the worm wheel teeth, holding spur gear geommetry/dimmensions."
+        inputs.addBoolValueInput('FastCompute', '快速计算', True, '', get(self, 'FastCompute', defaultfc))
+        WormGear_Type=inputs.addButtonRowCommandInput('WormGear_Type','蜗轮类型', False)
+        WormGear_Type.listItems.add('直齿轮',True,'Resources/Helical')
+        WormGear_Type.listItems.add('滚齿齿轮(圆柱刨坑)',False,'Resources/HobbedWorm')
+        WormGear_Type.tooltipDescription = "螺旋蜗轮：蜗轮为螺旋齿轮。\n滚齿直蜗轮：蜗杆定义蜗轮齿形，保持直齿轮几何形状/尺寸。"
 
-        HelicalSystem = inputs.addButtonRowCommandInput('HelicalSystem','Helical System', False)
-        HelicalSystem.listItems.add('Radial\n+Holds spur gear geommetry/dimmensions.\n-Has to use special cutting tools, one for each helix angle.',True,'Resources/Helical')
+        HelicalSystem = inputs.addButtonRowCommandInput('HelicalSystem','螺旋齿轮系统[不懂]', False)
+        HelicalSystem.listItems.add('径向\n+保持直齿轮的几何形状/尺寸。\n-需要使用特殊的切削工具，每种螺旋角对应一种工具。',True,'Resources/Helical')
         #HelicalSystem.listItems.add('Normal\n+Uses spur gear cutting tools.\n-Doesn\'t hold spur gear geommetry/dimmensions so it can\'t directly replace them.',False,'Resources/Helical')
 
         #usar clock wise como rosca izquierda o derecha
-        inputs.addBoolValueInput('LeftThreaded', 'Left threaded', True, '', get(self, 'LeftThreaded', False))
-        inputs.addValueInput('Module', 'Module [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'Module', .03)))
-        pitch = inputs.addValueInput('Pitch', 'Pitch [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'Pitch', 23.460456)))
+        inputs.addBoolValueInput('LeftThreaded', '左螺纹(逆时针)', True, '', get(self, 'LeftThreaded', False))
+        inputs.addValueInput('Module', '模数 [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'Module', .03)))
+        pitch = inputs.addValueInput('Pitch', '模数 [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'Pitch', 23.460456)))
         pitch.isVisible = False
 
-        inputs.addIntegerSpinnerCommandInput('Z', 'Number of teeth [ ]', 6, 250, 1, get(self, 'Z', 17))
-        inputs.addValueInput('WormLength_mm','Worm length [mm]','mm', adsk.core.ValueInput.createByReal(get(self, 'WormLength_mm', 1)))
-        WormLength_in = inputs.addValueInput('WormLength_in','Worm length [in]','in', adsk.core.ValueInput.createByReal(get(self, 'WormLength_in', 1)))
+        inputs.addIntegerSpinnerCommandInput('Z', '齿数', 6, 250, 1, get(self, 'Z', 17))
+        inputs.addValueInput('WormLength_mm','螺杆长度 [mm]','mm', adsk.core.ValueInput.createByReal(get(self, 'WormLength_mm', 1)))
+        WormLength_in = inputs.addValueInput('WormLength_in','螺杆长度 [in]','in', adsk.core.ValueInput.createByReal(get(self, 'WormLength_in', 1)))
         WormLength_in.isVisible = False
 
-        inputs.addValueInput('WormGearHeight_mm', 'Worm gear height [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'WormGearHeight_mm', 1)))
-        WormGearHeight_in = inputs.addValueInput('WormGearHeight_in', 'Worm gear height [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'WormGearHeight_in', 1)))
+        inputs.addValueInput('WormGearHeight_mm', '螺杆齿轮高度 [mm]', 'mm', adsk.core.ValueInput.createByReal(get(self, 'WormGearHeight_mm', 1)))
+        WormGearHeight_in = inputs.addValueInput('WormGearHeight_in', '螺杆齿轮高度 [in]', 'in', adsk.core.ValueInput.createByReal(get(self, 'WormGearHeight_in', 1)))
         WormGearHeight_in.isVisible = False
 
-        inputs.addFloatSpinnerCommandInput('PressureAngle', 'Pressure angle [°]', 'deg', 14.5, 30, 0.5, get(self, 'PressureAngle', 14.5))
-        inputs.addValueInput('WormDriveRadius_mm','Worm drive radius [mm]','mm', adsk.core.ValueInput.createByReal(get(self, 'WormDriveRadius_mm', 0.5)))
-        WormDriveRadius_in = inputs.addValueInput('WormDriveRadius_in','Worm drive radius [in]','in', adsk.core.ValueInput.createByReal(get(self, 'WormDriveRadius_in', 0.5)))
+        inputs.addFloatSpinnerCommandInput('PressureAngle', '压力角 [°]', 'deg', 14.5, 30, 0.5, get(self, 'PressureAngle', 14.5))
+        inputs.addValueInput('WormDriveRadius_mm','螺杆半径 [mm]','mm', adsk.core.ValueInput.createByReal(get(self, 'WormDriveRadius_mm', 0.5)))
+        WormDriveRadius_in = inputs.addValueInput('WormDriveRadius_in','螺杆半径 [in]','in', adsk.core.ValueInput.createByReal(get(self, 'WormDriveRadius_in', 0.5)))
         WormDriveRadius_in.isVisible = False
         
         # When any input changes, the following handler triggers
@@ -2313,7 +2313,7 @@ class WormGear_ChangedHandler(adsk.core.InputChangedEventHandler):
             
             # In the case that's the standard, it switches visibiity of module/pitch value inputs as well as gear height
             if changedInput.id == 'standard':
-                if changedInput.selectedItem.name == 'English':
+                if changedInput.selectedItem.name == '英制单位':
                     # English system is selected
 
                     # Tooth Size Value Inputs
@@ -2332,7 +2332,7 @@ class WormGear_ChangedHandler(adsk.core.InputChangedEventHandler):
                     inputs2.itemById('WormDriveRadius_mm').isVisible = False
                     inputs2.itemById('WormDriveRadius_in').isVisible = True
 
-                elif changedInput.selectedItem.name == 'Metric':
+                elif changedInput.selectedItem.name == '公制单位':
                     # Metric system is selected
 
                     # Tooth Size Value Inputs
@@ -2382,11 +2382,11 @@ class cmdDefOKButtonPressedEventHandler(adsk.core.CommandEventHandler):
 
             standard = inputs2.itemById('standard').selectedItem.name
             # Fusion's default units are cm, since you're using mm you'll have to multiply the value per 20
-            if standard == 'Metric':
+            if standard == '公制单位':
                 m=inputs2.itemById('Module').value*10
                 textmodule = "m= "+ inputs2.itemById('Module').expression
                 anchoeng=inputs2.itemById('GearHeight_mm').value
-            elif standard == 'English':
+            elif standard == '英制单位':
                 m=25.4/(inputs2.itemById('Pitch').value/2.54)
                 textmodule = "p= "+ inputs2.itemById('Pitch').expression
                 anchoeng=inputs2.itemById('GearHeight_in').value
@@ -2433,13 +2433,13 @@ class cmdDef2OKButtonPressedEventHandler(adsk.core.CommandEventHandler):
             # m=float(a)
 
             standard = inputs2.itemById('standard').selectedItem.name
-            if standard == 'Metric':
+            if standard == '公制单位':
                 m=inputs2.itemById('Module').value*10
                 textmodule = "m= "+ inputs2.itemById('Module').expression
                 anchoeng=inputs2.itemById('GearHeight_mm').value
                 espesorc=inputs2.itemById('RadialThickness_mm').value*10
                 textthickness = inputs2.itemById('RadialThickness_mm').expression
-            elif standard == 'English':
+            elif standard == '英制单位':
                 m=25.4/(inputs2.itemById('Pitch').value/2.54)
                 textmodule = "p= "+ inputs2.itemById('Pitch').expression
                 anchoeng=inputs2.itemById('GearHeight_in').value
@@ -2483,13 +2483,13 @@ class cmdDef3OKButtonPressedEventHandler(adsk.core.CommandEventHandler):
             # m=float(a)
 
             standard = inputs2.itemById('standard').selectedItem.name
-            if standard == 'Metric':
+            if standard == '公制单位':
                 m=inputs2.itemById('Module').value*10
                 textmodule = "m= "+ inputs2.itemById('Module').expression
                 anchoeng=inputs2.itemById('GearHeight_mm').value
                 espesorc=inputs2.itemById('RadialThickness_mm').value*10
                 textthickness = inputs2.itemById('RadialThickness_mm').expression
-            elif standard == 'English':
+            elif standard == '英制单位':
                 m=25.4/(inputs2.itemById('Pitch').value/2.54)
                 textmodule = "p= "+ inputs2.itemById('Pitch').expression
                 anchoeng=inputs2.itemById('GearHeight_in').value
@@ -2536,11 +2536,11 @@ class cmdDef4OKButtonPressedEventHandler(adsk.core.CommandEventHandler):
             z=inputs2.itemById('Z').value
             
             standard = inputs2.itemById('standard').selectedItem.name
-            if standard == 'Metric':
+            if standard == '公制单位':
                 m=inputs2.itemById('Module').value*10
                 textmodule = "m= "+ inputs2.itemById('Module').expression
                 anchoeng=inputs2.itemById('GearHeight_mm').value/mult1
-            elif standard == 'English':
+            elif standard == '英制单位':
                 m=25.4/(inputs2.itemById('Pitch').value/2.54)
                 textmodule = "p= "+ inputs2.itemById('Pitch').expression
                 anchoeng=inputs2.itemById('GearHeight_in').value/mult1
@@ -2595,13 +2595,13 @@ class cmdDef5OKButtonPressedEventHandler(adsk.core.CommandEventHandler):
        
         standard = inputs2.itemById('standard').selectedItem.name
         helicalSystem = inputs2.itemById('HelicalSystem').selectedItem.index
-        if standard == 'Metric':
+        if standard == '公制单位':
             m=inputs2.itemById('Module').value*10
             textmodule = "m= "+ inputs2.itemById('Module').expression
             anchoeng=inputs2.itemById('GearHeight_mm').value/mult1
             espesorc=inputs2.itemById('RadialThickness_mm').value*10
             textthickness = inputs2.itemById('RadialThickness_mm').expression
-        elif standard == 'English':
+        elif standard == '英制单位':
             m=25.4/(inputs2.itemById('Pitch').value/2.54)
             textmodule = "p= "+ inputs2.itemById('Pitch').expression
             anchoeng=inputs2.itemById('GearHeight_in').value/mult1
@@ -2661,7 +2661,7 @@ class cmdDef6OKButtonPressedEventHandler(adsk.core.CommandEventHandler):
             
             standard = inputs2.itemById('standard').selectedItem.name
             helicalSystem = inputs2.itemById('HelicalSystem').selectedItem.index
-            if standard == 'Metric':
+            if standard == '公制单位':
                 m=inputs2.itemById('Module').value*10
                 anchoeng=inputs2.itemById('GearHeight_mm').value/mult1
                 espesorc=inputs2.itemById('RadialThickness_mm').value*10
@@ -2669,7 +2669,7 @@ class cmdDef6OKButtonPressedEventHandler(adsk.core.CommandEventHandler):
                 # Text expressions
                 textmodule = "m= "+ inputs2.itemById('Module').expression
                 textthickness = inputs2.itemById('RadialThickness_mm').expression
-            elif standard == 'English':
+            elif standard == '英制单位':
                 m=25.4/(inputs2.itemById('Pitch').value/2.54)
                 anchoeng=inputs2.itemById('GearHeight_in').value/mult1
                 espesorc=inputs2.itemById('RadialThickness_in').value*10
@@ -2725,7 +2725,7 @@ class cmdDef7OKButtonPressedEventHandler(adsk.core.CommandEventHandler):
 
         standard = inputs2.itemById('standard').selectedItem.name
         helicalSystem = inputs2.itemById('HelicalSystem').selectedItem.index
-        if standard == 'Metric':
+        if standard == '公制单位':
             m=inputs2.itemById('Module').value*10
             anchoeng=inputs2.itemById('RackThickness_mm').value
             altura = inputs2.itemById('RackHeight_mm').value
@@ -2733,7 +2733,7 @@ class cmdDef7OKButtonPressedEventHandler(adsk.core.CommandEventHandler):
             # Text expressions
             textmodule = "m= "+ inputs2.itemById('Module').expression
 
-        elif standard == 'English':
+        elif standard == '英制单位':
             m=25.4/(inputs2.itemById('Pitch').value/2.54)
             # ui.messageBox(str(m))
             anchoeng=inputs2.itemById('RackThickness_in').value
@@ -2834,13 +2834,13 @@ class cmdDef8OKButtonPressedEventHandler(adsk.core.CommandEventHandler):
             z2=inputs2.itemById('ZPinion').value
             
             standard = inputs2.itemById('standard').selectedItem.name
-            if standard == 'Metric':
+            if standard == '公制单位':
                 m=inputs2.itemById('Module').value*10
 
                 # Text expressions
                 textmodule = "m= "+ inputs2.itemById('Module').expression
 
-            elif standard == 'English':
+            elif standard == '英制单位':
                 m=25.4/(inputs2.itemById('Pitch').value/2.54)
 
                 # Text expressions
@@ -2940,14 +2940,14 @@ class cmdDef9OKButtonPressedEventHandler(adsk.core.CommandEventHandler):
             z=inputs2.itemById('Z').value
             
             standard = inputs2.itemById('standard').selectedItem.name
-            if standard == 'Metric':
+            if standard == '公制单位':
                 m=inputs2.itemById('Module').value*10
                 anchoeng=inputs2.itemById('GearHeight_mm').value
 
                 # Text expressions
                 textmodule = "m= "+ inputs2.itemById('Module').expression
 
-            elif standard == 'English':
+            elif standard == '英制单位':
                 m=25.4/(inputs2.itemById('Pitch').value/2.54)
                 anchoeng=inputs2.itemById('GearHeight_in').value
 
@@ -3023,14 +3023,14 @@ class cmdDef10OKButtonPressedEventHandler(adsk.core.CommandEventHandler):
         z=inputs2.itemById('Z').value
         
         standard = inputs2.itemById('standard').selectedItem.name
-        if standard == 'Metric':
+        if standard == '公制单位':
             m=inputs2.itemById('Module').value*10
             anchoeng=inputs2.itemById('GearHeight_mm').value/mult1
 
             # Text expressions
             textmodule = "m= "+ inputs2.itemById('Module').expression
 
-        elif standard == 'English':
+        elif standard == '英制单位':
             m=25.4/(inputs2.itemById('Pitch').value/2.54)
             anchoeng=inputs2.itemById('GearHeight_in').value/mult1
 
@@ -3128,7 +3128,7 @@ class cmdDef11OKButtonPressedEventHandler(adsk.core.CommandEventHandler):
             z=inputs2.itemById('Z').value
 
             standard = inputs2.itemById('standard').selectedItem.name
-            if standard == 'Metric':
+            if standard == '公制单位':
                 m = inputs2.itemById('Module').value*10
                 anchoeng = inputs2.itemById('WormGearHeight_mm').value/mult1
                 largotornillo = inputs2.itemById('WormLength_mm').value*10
@@ -3138,7 +3138,7 @@ class cmdDef11OKButtonPressedEventHandler(adsk.core.CommandEventHandler):
                 textmodule = "m= "+ inputs2.itemById('Module').expression
                 textradius = inputs2.itemById('WormDriveRadius_mm').expression
 
-            elif standard == 'English':
+            elif standard == '英制单位':
                 m = 25.4/(inputs2.itemById('Pitch').value/2.54)
                 anchoeng = inputs2.itemById('WormGearHeight_in').value/mult1
                 largotornillo = inputs2.itemById('WormLength_in').value*10
@@ -3211,7 +3211,7 @@ def run(context):
         tbPanel = tbPanels.itemById('NewPanel')
         if tbPanel:
             tbPanel.deleteMe()
-        tbPanel = tbPanels.add('NewPanel', 'GF GEAR GENERATOR', 'SelectPanel', False)
+        tbPanel = tbPanels.add('NewPanel', '齿轮生成', 'SelectPanel', False)
         #En la línea anterior añade un tbPanel :toolbarTabPanels_var.add(id, name, positionID, isBefore)
         #id y name ya las conozco, positionId es el panel de relacion e isBefore te dice si va antes o despues del panel de positionId
 
@@ -3250,17 +3250,17 @@ def run(context):
             cmdDef10.deleteMe()
         if cmdDef11:
             cmdDef11.deleteMe()
-        cmdDef=ui.commandDefinitions.addButtonDefinition('NC1', 'Spur Gear', 'Creates a standard spur gear.','Resources/Recto')
-        cmdDef2=ui.commandDefinitions.addButtonDefinition('NC2','Internal Spur Gear','Creates a standard internal spurg gear.','Resources/InteriorGear')
-        cmdDef3=ui.commandDefinitions.addButtonDefinition('NC3','Non-Standard Internal Spur Gear','Creates a non-standard internal spur gear.','Resources/NoStdr')
-        cmdDef4=ui.commandDefinitions.addButtonDefinition('NC4','Simple/Double Helical Gear','Creates a standard simple/double helical gear. ','Resources/Helical')
-        cmdDef5=ui.commandDefinitions.addButtonDefinition('NC5','Simple/Double Non-Standard Internal Helical Gear.','Creates a non-standard simple/double internal helical gear.','Resources/NoStdr')
-        cmdDef6=ui.commandDefinitions.addButtonDefinition('NC6','Simple/Double Internal Helical Gear.','Creates a standard simple/double internal helical gear.','Resources/InteriorGear')
-        cmdDef7=ui.commandDefinitions.addButtonDefinition('NC7','Straight/Helical Gear Rack','Creates a gear rack.','Resources/Rack')
-        cmdDef8=ui.commandDefinitions.addButtonDefinition('NC8','90° Bevel Gears','Creates a standard pair of bevel gears with intersecting axes at 90°.','Resources/Conicos')
-        cmdDef9=ui.commandDefinitions.addButtonDefinition('NC9','Profile Shifted Spur Gear','Creates a spur gear using "Profile Shifting".','Resources/Recto')
-        cmdDef10=ui.commandDefinitions.addButtonDefinition('NC10','Profile Shifted Helical Gear','Creates a helical gear using "Profile Shifting".','Resources/Helical')
-        cmdDef11=ui.commandDefinitions.addButtonDefinition('NC11','Worm Gear Drive','Creates a worm gear drive with its screw.','Resources/WormGear')
+        cmdDef=ui.commandDefinitions.addButtonDefinition('NC1', '直齿轮', '创建一个标准直齿轮。','Resources/Recto')
+        cmdDef2=ui.commandDefinitions.addButtonDefinition('NC2','内直齿轮','创建一个标准内直齿轮。(齿牙向外)','Resources/InteriorGear')
+        cmdDef3=ui.commandDefinitions.addButtonDefinition('NC3','非标准内直齿轮','创建一个标准内直齿轮。(齿牙向内).','Resources/NoStdr')
+        cmdDef4=ui.commandDefinitions.addButtonDefinition('NC4','斜齿轮/螺杆齿轮','创建一个标准斜齿轮/螺杆齿轮。. ','Resources/Helical')
+        cmdDef5=ui.commandDefinitions.addButtonDefinition('NC5','非标准内斜齿轮/螺杆齿轮','创建一个标准内斜齿轮/螺杆齿轮。(齿牙向内)','Resources/NoStdr')
+        cmdDef6=ui.commandDefinitions.addButtonDefinition('NC6','内斜齿轮.','创建一个标准内斜齿轮。(齿牙向外)','Resources/InteriorGear')
+        cmdDef7=ui.commandDefinitions.addButtonDefinition('NC7','直齿/斜齿齿条','创建一个齿条','Resources/Rack')
+        cmdDef8=ui.commandDefinitions.addButtonDefinition('NC8','90度直齿伞齿轮','创建一对直齿伞齿轮,90度','Resources/Conicos')
+        cmdDef9=ui.commandDefinitions.addButtonDefinition('NC9','可改变齿牙的直齿轮','使用"齿形变位"创建直齿轮。','Resources/Recto')
+        cmdDef10=ui.commandDefinitions.addButtonDefinition('NC10','可改变齿牙的斜齿轮/螺杆齿轮','使用"齿形变位"创建螺旋齿轮。','Resources/Helical')
+        cmdDef11=ui.commandDefinitions.addButtonDefinition('NC11','涡轮/蜗杆齿轮','创建带蜗杆的蜗轮传动装置。','Resources/WormGear')
         #Sin lo siguiente ni los botones ni el panel aparecen
         cmdDefcontrol=tbPanel.controls.addCommand(cmdDef)
         tbPanel.controls.addCommand(cmdDef4)
