@@ -2351,9 +2351,9 @@ class WormGear_ChangedHandler(adsk.core.InputChangedEventHandler):
                     inputs2.itemById('WormDriveRadius_mm').isVisible = True
                     inputs2.itemById('WormDriveRadius_in').isVisible = False
             elif changedInput.id == 'WormGear_Type':
-                if changedInput.selectedItem.name == 'Hobbed Straight':
+                if changedInput.selectedItem.name == '滚齿齿轮(圆柱刨坑)':
                     inputs2.itemById('HelicalSystem').isVisible = False
-                elif changedInput.selectedItem.name == 'Helical':
+                elif changedInput.selectedItem.name == '直齿轮':
                     inputs2.itemById('HelicalSystem').isVisible = True
 
         except:
@@ -3151,7 +3151,7 @@ class cmdDef11OKButtonPressedEventHandler(adsk.core.CommandEventHandler):
             ap=inputs2.itemById('PressureAngle').value
             tipo=inputs2.itemById('WormGear_Type').selectedItem.name
 
-            if tipo=='Helical':
+            if tipo=='直齿轮':
                 hb = hidebodies(newComp)
                 worm=wormhelix(m,z,ap,radio*10,vul,largotornillo,vul, newComp)
                 linearpattern(worm[1],worm[0],worm[6],worm[0], newComp)
@@ -3167,7 +3167,7 @@ class cmdDef11OKButtonPressedEventHandler(adsk.core.CommandEventHandler):
                 showhiddenbodies(hb2, newComp)
                 fichatecnica(aaok,False,True,False,True,False,textmodule,ap,z,worm[3],0,0,textradius,0, newComp, bool(helicalSystem))
 
-            elif tipo=='Hobbed Straight':
+            elif tipo=='滚齿齿轮(圆柱刨坑)':
                 hb = hidebodies(newComp)
 
                 worm=wormhelix(m, z, ap, radio * 10, vul, largotornillo, vul, newComp)
