@@ -1,0 +1,13 @@
+{
+	"autodeskProduct":	"Fusion360",
+	"type":	"addin",
+	"id":	"98B46E3B-4F5F-4F53-9FDC-0BD69B555DE6",
+	"author":	"Juan Gras ",
+	"description":	{
+		"":	"蜗杆驱动半径齿轮设计插件为专业人士和爱好者的一致好评。\n 已汉化,请支持原作者@Github/GF-Gear-Generator "
+	},
+	"version":	"1.0.0",
+	"runOnStartup":	true,
+	"supportedOS":	"windows|mac",
+	"editEnabled":	true
+}
