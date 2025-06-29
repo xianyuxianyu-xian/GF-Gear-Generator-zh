@@ -1,14 +1,21 @@
 # 个人使用汉化版本
 
 ## 安装过程
-1. 下载代码压缩包
-2. 解压至一个文件夹,可以是C:\Users\用户名\AppData\Roaming\Autodesk\Autodesk Fusion 360\API\AddIns\GFGearGenerator1
-3. 打开fusion360⇢进入设计页面实用程序选项卡⇢点击附加模块点击附加模块选项卡⇢点击我的附加模块右侧+号
-![image](https://github.com/user-attachments/assets/576e7160-794d-4c30-bd14-052505586012)
-4. 选择步骤2的文件夹就可以使用了(可以选中启动时运行)
-5. 大概可能没bug吧,也可能手残改了什么
+1. 下载压缩包并选择一个文件夹解压,可以解压到C:\Users\"用户名"\AppData\Roaming\Autodesk\Autodesk Fusion 360\API\AddIns,也可以自选文件夹
+2. 点击fusion 360实用程序->附加模块
+![image](https://github.com/xianyuxianyu-xian/GF-Gear-Generator-zh/blob/main/%E4%BD%BF%E7%94%A8%E6%95%99%E5%AD%A6.png)
+3. 根据上面图片点击导入,如果放置在addins文件夹在由我创建,自建文件夹在从设备
+4. 点击运行开关,勾选运行时启动(默认)
+5. 在实用程序就能看见了(点击下箭头更多功能,可以放置工具栏/快捷方式/快捷键)
+![image](https://github.com/xianyuxianyu-xian/GF-Gear-Generator-zh/blob/main/%E5%B1%95%E7%A4%BA.png)
 
 
+# 注意事项
+1. 大概可能没bug吧,也可能手残改了什么
+2. 蜗轮/蜗杆的直齿轮是斜齿轮(不知道为什么)
+3. 翻译不准,可以提issue(逃
+
+**↓原文↓**
 ***
 # GF-Gear-Generator
 Main repo of the GF Gear Generator for Autodesk's Fusion 360.
